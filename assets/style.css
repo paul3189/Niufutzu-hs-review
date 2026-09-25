@@ -1,0 +1,239 @@
+/* 高中數學教學系統 — 共用樣式 */
+:root {
+  --bg: #f7f8fb;
+  --card: #ffffff;
+  --ink: #1f2937;
+  --ink-soft: #6b7280;
+  --line: #e5e7eb;
+  --blue: #2563eb;      /* 概念 */
+  --blue-soft: #eff6ff;
+  --amber: #d97706;     /* 關鍵字破題 */
+  --amber-soft: #fffbeb;
+  --green: #059669;     /* 例題 */
+  --green-soft: #ecfdf5;
+  --purple: #7c3aed;    /* 檢核 */
+  --purple-soft: #f5f3ff;
+  --red: #dc2626;
+  --radius: 14px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 14px rgba(0,0,0,.04);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Segoe UI", "Microsoft JhengHei", "PingFang TC", system-ui, sans-serif;
+  line-height: 1.75; font-size: 17px;
+}
+.wrap { max-width: 960px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* ── 頁首導覽 ── */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  max-width: 960px; margin: 0 auto; padding: 10px 20px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.topbar a { color: var(--blue); text-decoration: none; font-weight: 600; }
+.topbar a:hover { text-decoration: underline; }
+.topbar .crumb { color: var(--ink-soft); font-weight: 400; }
+.topbar .spacer { flex: 1; }
+
+/* ── 標題 ── */
+h1 { font-size: 1.9rem; margin: 18px 0 4px; }
+h1 .ch-num { color: var(--ink-soft); font-size: 1.1rem; font-weight: 600; margin-right: 10px; }
+.subtitle { color: var(--ink-soft); margin: 0 0 24px; }
+h2.sec {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 1.35rem; margin: 44px 0 16px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--line);
+}
+h2.sec .tag {
+  font-size: .8rem; padding: 3px 10px; border-radius: 999px; color: #fff; font-weight: 700;
+}
+.tag-concept { background: var(--blue); }
+.tag-keyword { background: var(--amber); }
+.tag-example { background: var(--green); }
+.tag-check   { background: var(--purple); }
+h3 { font-size: 1.12rem; margin: 26px 0 10px; }
+
+/* ── 卡片 ── */
+.card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 20px 24px; margin: 16px 0;
+}
+.card.concept { border-left: 5px solid var(--blue); }
+.card.keyword { border-left: 5px solid var(--amber); }
+.card.example { border-left: 5px solid var(--green); }
+.card.check   { border-left: 5px solid var(--purple); }
+
+/* 重點框 */
+.callout {
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  border: 1px solid transparent;
+}
+.callout.idea   { background: var(--blue-soft); border-color: #bfdbfe; }
+.callout.warn   { background: #fef2f2; border-color: #fecaca; }
+.callout.tip    { background: var(--amber-soft); border-color: #fde68a; }
+.callout.formula{ background: var(--green-soft); border-color: #a7f3d0; }
+.callout .co-title { font-weight: 700; margin-bottom: 4px; }
+
+/* ── 圖像區 ── */
+.fig { text-align: center; margin: 18px auto; }
+.fig svg { max-width: 100%; height: auto; }
+.fig .caption { font-size: .88rem; color: var(--ink-soft); margin-top: 6px; }
+.interactive-box {
+  background: #fbfcfe; border: 1.5px dashed #c7d2fe; border-radius: 10px;
+  padding: 16px; margin: 16px 0;
+}
+.interactive-box .ctrl { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+.interactive-box label { font-size: .92rem; color: var(--ink-soft); min-width: 90px; }
+.interactive-box input[type=range] { flex: 1; min-width: 140px; accent-color: var(--blue); }
+.interactive-box .val { font-family: Consolas, monospace; font-weight: 700; color: var(--blue); min-width: 56px; }
+
+/* ── 關鍵字破題表 ── */
+table.kw {
+  width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .95rem;
+  background: var(--card);
+}
+table.kw th, table.kw td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; vertical-align: top; }
+table.kw th { background: var(--amber-soft); color: #92400e; }
+table.kw td.kw-key { font-weight: 700; color: var(--amber); white-space: nowrap; }
+@media (max-width: 640px){ table.kw td.kw-key { white-space: normal; } }
+.kw-scroll { overflow-x: auto; }
+
+/* ── 例題 ── */
+.exm { margin: 26px 0; }
+.exm .exm-head {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  font-weight: 700; font-size: 1.05rem; color: var(--green);
+}
+.exm .exm-src { font-size: .82rem; color: var(--ink-soft); font-weight: 400; }
+.exm .exm-body { margin: 8px 0 12px; }
+.badge {
+  display: inline-block; font-size: .78rem; padding: 2px 9px; border-radius: 999px;
+  background: var(--green-soft); color: var(--green); border: 1px solid #a7f3d0; font-weight: 600;
+}
+.badge.beyond { background: #fdf4ff; color: #a21caf; border-color: #f0abfc; }
+
+/* 解法分頁 */
+.sol-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 0; }
+.sol-tabs button {
+  border: 1.5px solid var(--line); background: #fff; border-radius: 999px;
+  padding: 6px 16px; cursor: pointer; font-size: .92rem; font-weight: 600; color: var(--ink-soft);
+  font-family: inherit;
+}
+.sol-tabs button.active { border-color: var(--green); color: var(--green); background: var(--green-soft); }
+.sol-panel { display: none; padding: 14px 16px; border: 1px solid var(--line); border-top: none;
+  border-radius: 0 0 10px 10px; background: #fcfefd; }
+.sol-panel.active { display: block; }
+.sol-wrap { margin-top: 10px; border-radius: 10px; }
+
+/* 顯示/隱藏解答 */
+.reveal-btn {
+  display: inline-block; background: var(--green); color: #fff; border: none;
+  padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: .95rem; font-weight: 700;
+  font-family: inherit;
+}
+.reveal-btn:hover { filter: brightness(1.08); }
+.reveal-target { display: none; }
+.reveal-target.shown { display: block; }
+.think-first {
+  font-size: .88rem; color: var(--ink-soft); margin: 6px 0;
+}
+
+/* ── 檢核測驗 ── */
+.quiz-q { border-top: 1px solid var(--line); padding: 16px 0; }
+.quiz-q:first-child { border-top: none; }
+.quiz-q .q-text { font-weight: 600; margin-bottom: 10px; }
+.quiz-q .q-no { color: var(--purple); font-weight: 800; margin-right: 6px; }
+.quiz-opts { display: grid; gap: 8px; }
+.quiz-opts label {
+  display: flex; gap: 10px; align-items: baseline; padding: 8px 12px;
+  border: 1.5px solid var(--line); border-radius: 8px; cursor: pointer; background: #fff;
+}
+.quiz-opts label:hover { border-color: #c4b5fd; }
+.quiz-opts label.sel { border-color: var(--purple); background: var(--purple-soft); }
+.quiz-opts label.correct { border-color: var(--green); background: var(--green-soft); }
+.quiz-opts label.wrong { border-color: var(--red); background: #fef2f2; }
+.quiz-num input {
+  font-size: 1rem; padding: 8px 12px; border: 1.5px solid var(--line); border-radius: 8px;
+  width: 180px; font-family: Consolas, monospace;
+}
+.quiz-fb { margin-top: 8px; font-size: .92rem; display: none; }
+.quiz-fb.shown { display: block; }
+.quiz-fb .fb-ok { color: var(--green); font-weight: 700; }
+.quiz-fb .fb-no { color: var(--red); font-weight: 700; }
+.quiz-fb .fb-sol { color: var(--ink-soft); }
+.quiz-submit {
+  background: var(--purple); color: #fff; border: none; border-radius: 10px;
+  padding: 12px 28px; font-size: 1.02rem; font-weight: 700; cursor: pointer; margin-top: 14px;
+  font-family: inherit;
+}
+.quiz-submit:hover { filter: brightness(1.08); }
+.quiz-result {
+  margin-top: 16px; padding: 14px 18px; border-radius: 10px; font-weight: 600; display: none;
+}
+.quiz-result.pass { display: block; background: var(--green-soft); border: 1px solid #a7f3d0; color: #065f46; }
+.quiz-result.fail { display: block; background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412; }
+
+/* ── 首頁 ── */
+.hero { text-align: center; padding: 34px 0 10px; }
+.hero h1 { font-size: 2.2rem; margin-bottom: 6px; }
+.hero p { color: var(--ink-soft); }
+.sem-tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 22px 0; }
+.sem-tabs button {
+  border: 1.5px solid var(--line); background: #fff; border-radius: 999px;
+  padding: 8px 20px; cursor: pointer; font-weight: 700; font-size: .98rem; color: var(--ink-soft);
+  font-family: inherit;
+}
+.sem-tabs button.active { border-color: var(--blue); color: var(--blue); background: var(--blue-soft); }
+.ch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+.ch-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px 18px; box-shadow: var(--shadow); text-decoration: none; color: var(--ink);
+  display: flex; flex-direction: column; gap: 6px; transition: transform .12s, box-shadow .12s;
+  position: relative;
+}
+.ch-card:hover { transform: translateY(-2px); box-shadow: 0 4px 18px rgba(0,0,0,.09); }
+.ch-card .ch-title { font-weight: 700; font-size: 1.04rem; }
+.ch-card .ch-num2 { color: var(--blue); font-weight: 800; font-size: .85rem; }
+.ch-card .ch-desc { font-size: .87rem; color: var(--ink-soft); }
+.ch-card .ch-status { font-size: .82rem; margin-top: auto; padding-top: 6px; }
+.st-mastered { color: var(--green); font-weight: 700; }
+.st-partial  { color: var(--amber); font-weight: 700; }
+.st-none     { color: var(--ink-soft); }
+.sem-progress { margin: 10px 0 18px; font-size: .92rem; color: var(--ink-soft); text-align: center; }
+.pbar { height: 8px; background: var(--line); border-radius: 999px; overflow: hidden; max-width: 420px; margin: 6px auto; }
+.pbar > div { height: 100%; background: linear-gradient(90deg, var(--blue), var(--green)); border-radius: 999px; }
+
+/* 章節內目錄 */
+.toc { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 6px; }
+.toc a {
+  font-size: .85rem; text-decoration: none; padding: 4px 12px; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--ink-soft); background: #fff;
+}
+.toc a:hover { color: var(--blue); border-color: var(--blue); }
+
+/* 章末導航 */
+.ch-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 40px; flex-wrap: wrap; }
+.ch-nav a {
+  text-decoration: none; color: var(--blue); font-weight: 700;
+  padding: 10px 18px; border: 1.5px solid var(--line); border-radius: 10px; background: #fff;
+}
+.ch-nav a:hover { border-color: var(--blue); }
+
+/* 長數學式在窄螢幕要自己橫捲，不能撐破頁面 */
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 3px 0; }
+.katex-display > .katex { text-align: initial; }
+
+@media print {
+  .topbar, .quiz-submit, .reveal-btn, .sol-tabs { display: none; }
+  .katex-display { overflow: visible; }
+  .reveal-target, .sol-panel { display: block !important; }
+  body { background: #fff; }
+  .card { box-shadow: none; }
+}

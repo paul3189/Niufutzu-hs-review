@@ -1,0 +1,251 @@
+/* 牛夫子主題（最後載入，覆寫 style.css / mapstyle.css / figstyle.css）
+ *
+ * 色票取自楊安琪筆下的牛夫子：斑塊的深酒紅、數學課本的粉紅、圓框眼鏡的黑、紙張的米白。
+ * 只改「外觀」不改結構，所以把它拿掉整份地圖仍然能用。 */
+
+:root {
+  /* ── 牛夫子原色 ── */
+  --cow-wine: #5c222b;        /* 身上的斑塊、輪廓 */
+  --cow-wine-d: #3f161d;      /* 更深，用在根節點與深色底 */
+  --cow-wine-l: #8a4450;
+  --cow-pink: #f7a8b8;        /* 數學課本 */
+  --cow-pink-soft: #fdebef;
+  --cow-pink-line: #f6d2da;
+  --cow-ink: #1a1a1a;         /* 眼鏡 */
+  --cow-cream: #fbf6f0;       /* 紙張 */
+  --cow-tan: #c98a47;         /* 書本封面 */
+
+  /* ── 覆寫共用色票 ── */
+  --bg: #fbf6f0;
+  --card: #ffffff;
+  --ink: #3a2a2e;
+  --ink-soft: #8a7378;
+  --line: #ecdfda;
+  --blue: #7a2e3c;            /* 原「概念藍」→ 酒紅 */
+  --blue-soft: #fceff1;
+  --amber: #c97b2c;
+  --amber-soft: #fff6ea;
+  --green: #4e7a34;
+  --green-soft: #f1f7ea;
+  --purple: #8e3b62;
+  --purple-soft: #fbeff5;
+  --red: #b03a55;
+  --radius: 20px;
+  --shadow: 0 2px 0 rgba(92, 34, 43, .05), 0 8px 20px rgba(92, 34, 43, .07);
+}
+
+/* 米白紙感：極淡的圓點，像方格筆記本翻面 */
+body {
+  background-color: var(--cow-cream);
+  background-image: radial-gradient(circle at 1px 1px, rgba(92, 34, 43, .055) 1px, transparent 0);
+  background-size: 26px 26px;
+}
+
+/* ── 頁首：牛夫子當 logo ── */
+.topbar {
+  background: rgba(251, 246, 240, .93);
+  border-bottom: 2px solid var(--cow-pink-line);
+}
+.topbar a { color: var(--cow-wine); }
+.topbar .crumb { color: var(--ink-soft); }
+.cow-logo {
+  height: 36px; width: auto; margin: -6px 4px -6px 0; vertical-align: middle;
+  flex: 0 0 auto;
+}
+.cow-brand {
+  display: inline-flex; align-items: center; gap: 2px;
+  font-weight: 800; color: var(--cow-wine); text-decoration: none; letter-spacing: .02em;
+}
+.cow-brand:hover { text-decoration: none; }
+
+/* ── 標題 ── */
+h1, h2.sec, h3 { letter-spacing: .02em; }
+h2.sec { border-bottom: 2px dashed var(--cow-pink-line); }
+h2.sec .tag { border-radius: 999px; }
+.tag-concept { background: var(--cow-wine); }
+.map-hero h1 { color: var(--cow-wine); }
+
+/* ── 卡片：加粗描邊 + 圓角，像貼紙 ── */
+.card, .flow-card, .dom-card, .fig-card, .mm-shell, .lv-item, .cx-note, .hit,
+.tbl-scroll, .ed-banner {
+  border-width: 1.5px; border-radius: var(--radius);
+}
+.card.concept { border-left: 6px solid var(--cow-wine); }
+.flow-card h4 { color: var(--cow-wine); }
+.flow-card b { color: var(--amber); }
+
+/* ── 首頁 hero：牛夫子站旁邊 ── */
+.map-hero, .hero { position: relative; }
+.hero-cow {
+  display: block; margin: 6px auto -2px; width: min(220px, 46vw); height: auto;
+  filter: drop-shadow(0 6px 10px rgba(92, 34, 43, .12));
+}
+.hero-row {
+  display: flex; align-items: flex-end; justify-content: center; gap: 20px; flex-wrap: wrap;
+  text-align: left;
+}
+.hero-row .hero-cow { margin: 0; width: min(180px, 38vw); }
+.hero-row .hero-text { max-width: 620px; }
+
+/* ── 首頁的行動鈕（取代原本寫死的深灰／藍紫） ── */
+.cow-btn {
+  display: inline-block; margin: 4px; padding: 10px 22px; border-radius: 999px;
+  font-weight: 700; text-decoration: none;
+  background: var(--cow-wine); color: #fff; border: 2px solid var(--cow-wine);
+}
+.cow-btn:hover { background: var(--cow-wine-d); border-color: var(--cow-wine-d); text-decoration: none; }
+.cow-btn.ghost { background: #fff; color: var(--cow-wine); }
+.cow-btn.ghost:hover { background: var(--cow-pink-soft); }
+
+/* ── 牛夫子說（提示框） ── */
+.cow-say {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: var(--cow-pink-soft); border: 2px solid var(--cow-pink-line);
+  border-radius: var(--radius); padding: 14px 18px; margin: 16px 0;
+}
+.cow-say > img { flex: 0 0 78px; width: 78px; height: auto; }
+.cow-say .say-body { flex: 1; min-width: 0; font-size: .96rem; }
+.cow-say .say-t {
+  font-weight: 800; color: var(--cow-wine); margin-bottom: 3px; display: block;
+}
+
+/* ── 空狀態：疑問牛 ── */
+.cow-empty {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 26px 10px; color: var(--ink-soft); text-align: center;
+}
+.cow-empty img { width: 132px; height: auto; opacity: .95; }
+
+/* 抽屜「常見錯誤」旁的牛夫子 */
+.dw-sec .cow-mini {
+  width: 40px; height: auto; float: right; margin: -6px 0 4px 8px;
+}
+
+/* ── 按鈕／膠囊 ── */
+.mm-bar button, .cx-tabs button, .gal-nav a, .lv-chip {
+  border-radius: 999px; border-width: 1.5px;
+}
+.mm-bar button:hover, .gal-nav a:hover { border-color: var(--cow-wine); color: var(--cow-wine); }
+.ed-sw { border: 1.5px solid var(--cow-pink-line); background: #fff; }
+.ed-sw button.on { background: var(--cow-wine); color: #fff; }
+
+/* ── 心智圖畫布：換成米白格點 ── */
+.mm-scroll {
+  background: radial-gradient(circle at 1px 1px, #ecdcd6 1px, transparent 0) 0 0/22px 22px;
+}
+.mm-bar { background: #fdf8f4; }
+
+/* ── 圖卡：底色改成米白，讓透明底的幾何圖融進去 ── */
+.fig-card { background: #fffdfb; }
+.fig-card .fc-fig { background: #fff; border: 1.5px solid #f4e9e6; border-radius: 14px; }
+.fig-card:hover { border-color: var(--cow-pink); }
+.fig-card .fc-w { color: #a85b1e; }
+.fig-card .fc-l { color: var(--red); }
+.fig.fig-lg { border: 1.5px solid #f4e9e6; border-radius: 16px; background: #fff; }
+
+/* ── 表格 ── */
+table.tools th { background: var(--cow-pink-soft); color: var(--cow-wine); }
+table.tools td.t-l { color: var(--red); }
+
+/* ── 年級／幾何標籤 ── */
+.g-chip { background: var(--cow-pink-soft); color: var(--cow-wine); }
+.geo-chip { background: #eef6e8; color: var(--green); }
+
+/* ── 抽屜 ── */
+.mm-drawer { border-left: 2px solid var(--cow-pink-line); }
+.mm-drawer .dw-head { border-bottom: 2px dashed var(--cow-pink-line); }
+.mm-drawer .dw-head h3 { color: var(--cow-wine); }
+.dw-formula { background: var(--cow-pink-soft); border: 1.5px solid var(--cow-pink-line); }
+.lab-f { background: var(--cow-pink-soft); color: var(--cow-wine); }
+
+/* ── 頁尾署名 ── */
+.cow-credit {
+  margin: 40px 0 0; padding-top: 16px; border-top: 2px dashed var(--cow-pink-line);
+  font-size: .84rem; color: var(--ink-soft); display: flex; align-items: center; gap: 10px;
+}
+.cow-credit img { width: 46px; height: auto; }
+
+@media (max-width: 720px) {
+  .hero-row { justify-content: center; text-align: center; }
+  .cow-say > img { flex: 0 0 58px; width: 58px; }
+}
+
+/* 手機：頁首只留牛頭與圖示，否則置頂列會吃掉四分之一個螢幕 */
+@media (max-width: 620px) {
+  .topbar-inner { gap: 10px; padding: 7px 14px; font-size: .93rem; }
+  .cow-brand .brand-t, .topbar .crumb { display: none; }
+  .cow-logo { height: 30px; margin: -4px 0; }
+  .ed-sw button { padding: 3px 9px; font-size: .78rem; }
+}
+
+@media print {
+  body { background: #fff; }
+  .hero-cow, .cow-say > img, .cow-empty img, .dw-sec .cow-mini, .cow-credit img { display: none; }
+}
+
+/* ════════════════════════════════════════════════════════
+   高中講義追加層（handouts/）
+   國中工具地圖沒有的版位：例題卡、類似題、題庫區、詳解卡、教學手冊。
+   只改外觀；拿掉這個檔案講義仍能正常閱讀。
+   ════════════════════════════════════════════════════════ */
+
+/* ── 貼紙感：加粗描邊 + 大圓角 ── */
+.ex, .sim, .qbank, .sol, .story, .hd-hero, .interactive-box,
+.callout, .link, .ask, .think-first {
+  border-radius: var(--radius);
+}
+.ex, .qbank, .sol, .story { border-width: 1.5px; }
+.ex { border-left-width: 6px; }
+.sim { border-left-width: 6px; border-radius: 0 0 var(--radius) var(--radius); }
+.sol { border-left-width: 6px; }
+
+/* ── 主視覺：牛夫子站在標題旁 ── */
+.hd-hero { position: relative; padding-right: 190px; border-width: 1.5px; }
+.hd-hero .hero-cow {
+  position: absolute; right: 16px; bottom: 0; width: 156px; height: auto;
+  margin: 0; filter: drop-shadow(0 6px 10px rgba(92, 34, 43, .12));
+}
+
+/* ── 常見錯誤／陷阱：瞪大眼睛的牛夫子 ── */
+.callout.warn, .pit {
+  background-image: url(mascot/web/cow_float.png);
+  background-repeat: no-repeat;
+  background-position: right 12px top 10px;
+  background-size: 58px auto;
+  padding-right: 78px;
+}
+
+/* ── 破題點：改成粉紅便條 ── */
+.ex-key { border-style: dashed; border-radius: 14px; }
+
+/* ── 膠囊化 ── */
+.ans-btn, .solink, .toc a, .mini-toc a, .jump a, .ch-nav a, .ex-no, .sim-tag, .qno {
+  border-radius: 999px;
+}
+.toc a:hover, .mini-toc a:hover, .jump a:hover { border-color: var(--cow-wine); color: var(--cow-wine); }
+
+/* ── 表格 ── */
+table.kw th, table.fx th, table.tg th { background: var(--cow-pink-soft); color: var(--cow-wine); }
+
+/* ── 圖片區：讓透明底的 SVG 融進米白紙 ── */
+.fig svg { background: #fff; border: 1.5px solid #f4e9e6; border-radius: 16px; }
+.interactive-box { border-width: 2px; border-style: dashed; border-color: var(--cow-pink-line); background: #fffaf6; }
+
+/* ── 詳解本步驟圓標 ── */
+.stepbox .st .n { box-shadow: 0 0 0 2px var(--cow-pink-soft); }
+
+/* ── 頁尾署名 ── */
+.cow-credit { justify-content: center; text-align: left; }
+.cow-credit b { color: var(--cow-wine); }
+
+@media (max-width: 720px) {
+  .hd-hero { padding-right: 26px; padding-bottom: 150px; }
+  .hd-hero .hero-cow { right: 50%; transform: translateX(50%); width: 130px; }
+}
+
+@media print {
+  .hd-hero .hero-cow { display: none; }
+  .hd-hero { padding-right: 26px; }
+  .callout.warn, .pit { background-image: none; padding-right: 18px; }
+  .fig svg { border: none; }
+}
