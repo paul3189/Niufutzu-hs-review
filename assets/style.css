@@ -84,6 +84,11 @@ h3 { font-size: 1.12rem; margin: 26px 0 10px; }
 /* ── 圖像區 ── */
 .fig { text-align: center; margin: 18px auto; }
 .fig svg { max-width: 100%; height: auto; }
+/* 容器裡的「svg」規則（這裡、theme-cow／handout-pro 的底色框線、frame.css、對話框圖）不能選到 KaTeX 根號用的 svg，
+   否則根號被壓扁成 1.6px 高、還多出底色框線（11-05 國中九上圓「三角形怎麼算」圖說 4√3 只剩數字）。用 !important 才不受載入順序影響。 */
+.fig .katex svg, .fr-fig .katex svg, .hc-fig-img .katex svg, .hc-figzoom-img .katex svg {
+  max-width: none !important; height: inherit !important; background: none !important; border: 0 !important; border-radius: 0 !important;
+}
 .fig .caption { font-size: .88rem; color: var(--ink-soft); margin-top: 6px; }
 .interactive-box {
   background: #fbfcfe; border: 1.5px dashed #c7d2fe; border-radius: 10px;

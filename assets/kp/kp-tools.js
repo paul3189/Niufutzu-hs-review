@@ -80,6 +80,11 @@ window.KP_TOOLS = {
   "number/complex/極式與棣美弗定理": ["N-03"],
   "number/complex/n 次方根（等分圓周）": ["N-03"],
   "number/complex/複數平面的幾何意義": ["N-03"],
+  "number/complex/複數的平方根與複係數二次方程式": ["N-03","P-02"],   // 2026-10-28 g12b-ch02 1-4
+  "number/complex/繞任一點旋轉（正三角形、正方形）": ["N-03"],        // 3-3
+  "number/complex/用商看夾角、共線與垂直": ["N-03"],                  // 3-4
+  "number/complex/1 的 n 次方根與 ω": ["N-03"],                       // 4-3、4-4
+  "number/complex/代數基本定理（根的個數）": ["N-03","P-02"],          // 5-1、5-3
 
   /* ── equation 方程式與不等式 ── */
   // equation/quad 二次方程式與判別式
@@ -121,6 +126,9 @@ window.KP_TOOLS = {
   "equation/lp/頂點檢驗法": ["G-12"],
   "equation/lp/平移法（斜率比較）": ["G-12"],
   "equation/lp/整數規劃的處理": ["G-12"],
+  "equation/lp/無界區域與多組最佳解": ["G-12"],
+  "equation/lp/應用題列式（設變數、限制、非負、目標）": ["G-12"],
+  "equation/lp/距離平方與連線斜率（補充）": ["G-12"],
 
   /* ── function 函數與圖形 ── */
   // function/fbasic 函數的基本概念
@@ -130,6 +138,7 @@ window.KP_TOOLS = {
   "function/fbasic/合成函數": ["P-08"],
   "function/fbasic/反函數": ["P-08","E-05"],
   "function/fbasic/奇函數與偶函數": ["P-05","T-06"],
+  "function/fbasic/凹凸的意義（割線在上或在下）": ["C-03"],
   // function/quadf 一次與二次函數
   "function/quadf/標準式（頂點式）": ["P-03"],
   "function/quadf/一般式與頂點公式": ["P-03"],
@@ -216,6 +225,7 @@ window.KP_TOOLS = {
   "geometry/line/兩直線的夾角": ["G-01","T-04"],
   "geometry/line/角平分線": ["G-01"],
   "geometry/line/三角形的心": ["G-04"],
+  "geometry/line/二元一次不等式的區域": ["G-03","G-01"],
   // geometry/circle 圓
   "geometry/circle/標準式與一般式": ["G-02"],
   "geometry/circle/圓與直線的關係": ["G-02"],
@@ -233,6 +243,12 @@ window.KP_TOOLS = {
   "geometry/conic/正焦弦與離心率": ["G-11"],
   "geometry/conic/光學（反射）性質": ["G-11"],
   "geometry/conic/平移後的圓錐曲線": ["G-11"],
+  "geometry/conic/焦半徑與焦點三角形": ["G-11"],
+  "geometry/conic/漸近線、共軛與等軸雙曲線": ["G-11"],
+  "geometry/conic/圓伸縮成橢圓（面積 πab）": ["G-11"],
+  "geometry/conic/圓與橢圓的參數式": ["G-11"],
+  "geometry/conic/把橢圓旋轉成斜的（含 xy 項）": ["G-11"],
+  "geometry/conic/沒有 xy 項的二元二次方程式（圖形與退化）": ["G-11"],
   // geometry/locus 軌跡與對稱
   "geometry/locus/軌跡三步驟": ["G-02","G-01"],
   "geometry/locus/常見軌跡對照": ["G-01","G-02"],
@@ -323,6 +339,8 @@ window.KP_TOOLS = {
   "sequence/limit/分式極限（同除最高次）": ["D-04"],
   "sequence/limit/無窮等比級數": ["D-04"],
   "sequence/limit/夾擠定理": ["D-04"],
+  "sequence/limit/遞迴數列的極限（若極限存在）": ["D-04"],
+  "sequence/limit/牛頓求根法": ["D-04","P-02"],
   "sequence/limit/函數極限與連續": ["C-01"],
   "sequence/limit/介值定理": ["C-01","P-02"],
   "sequence/limit/漸近線（補充）": ["C-01"],
@@ -366,8 +384,11 @@ window.KP_TOOLS = {
   "prob/rv/期望值": ["D-09"],
   "prob/rv/期望值的線性": ["D-14","D-09"],
   "prob/rv/變異數與標準差": ["D-14"],
+  "prob/rv/兩隨機變數的獨立與變異數相加": ["D-14"],
   "prob/rv/二項分布": ["D-14"],
+  "prob/rv/二項分布機率最大的 k": ["D-14"],
   "prob/rv/幾何分布": ["D-14"],
+  "prob/rv/合理性檢定（顯著水準與拒絕域）": ["D-14"],
   "prob/rv/期望值的決策應用": ["D-09"],
   // prob/stat 數據分析
   "prob/stat/集中量數": ["D-12"],
@@ -400,21 +421,26 @@ window.KP_TOOLS = {
   "calculus/analysis/二階導數與凹凸": ["C-03"],
   "calculus/analysis/反曲點": ["C-03","P-05"],
   "calculus/analysis/增減凹凸表": ["C-03"],
+  "calculus/analysis/由 f′ 的圖判讀 f": ["C-03"],
   "calculus/analysis/用單調性證不等式": ["C-03"],
   "calculus/analysis/最佳化應用": ["C-03"],
   // calculus/integ 積分
   "calculus/integ/不定積分（反導數）": ["C-04"],
   "calculus/integ/微積分基本定理": ["C-04"],
+  "calculus/integ/積分方程": ["C-04"],
   "calculus/integ/定積分的性質": ["C-04"],
+  "calculus/integ/上和與下和": ["C-04"],
   "calculus/integ/黎曼和": ["C-04"],
   "calculus/integ/變數代換（補充）": ["C-04"],
   "calculus/integ/奇偶函數的定積分": ["C-04"],
   // calculus/integapp 積分的應用
   "calculus/integapp/兩曲線間的面積": ["C-05"],
+  "calculus/integapp/用圓面積算半圓的積分": ["C-05","C-04"],
   "calculus/integapp/旋轉體體積（圓盤法）": ["C-05"],
   "calculus/integapp/切片積分法": ["C-05"],
   "calculus/integapp/位移與總路程": ["C-05","C-04"],
-  "calculus/integapp/平均值": ["C-05"]
+  "calculus/integapp/平均值": ["C-05"],
+  "calculus/integapp/消費者剩餘與生產者剩餘（數乙）": ["C-05"]
 };
 
 /* 主題層（給「主題→考點」查詢用） */
