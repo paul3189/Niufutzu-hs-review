@@ -243,6 +243,15 @@ table.kw th, table.fx th, table.tg th { background: var(--cow-pink-soft); color:
   .hd-hero .hero-cow { right: 50%; transform: translateX(50%); width: 130px; }
 }
 
+/* ── 不用 emoji（老師 11-07 裁定）：功能符號 ✓ ✗ 全站同一種顏色、字型；圖示一律單色線條 svg.ic ── */
+.mk-ok, .mk-no { font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Apple Symbols", system-ui, sans-serif; font-weight: 700; font-style: normal; }
+.mk-ok { color: var(--green, #4e7a34); }
+.mk-no { color: var(--red, #b03a55); }
+svg.ic { width: 1em; height: 1em; vertical-align: -.14em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+svg.ic.ic-ok { color: var(--green, #4e7a34); }
+svg.ic.ic-no { color: var(--red, #b03a55); }
+svg.ic.ic-dom { color: var(--cow-wine, #5c222b); margin-right: .3em; }
+
 @media print {
   .hd-hero .hero-cow { display: none; }
   .hd-hero { padding-right: 26px; }

@@ -36,8 +36,8 @@
   var TOK = /(\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*)/;
   function tex(t, disp) {
     if (!window.katex) return "<code>" + esc(t) + "</code>";
-    /* 資料裡偶爾把「✔」「、」寫進數學式（檢查總和那類句子）：換成 KaTeX 認得的寫法，不然會在主控台跳警告 */
-    t = String(t).replace(/✔/g, "\\checkmark").replace(/、/g, ",\\ ");
+    /* 資料裡偶爾把「✓」「、」寫進數學式（檢查總和那類句子）：換成 KaTeX 認得的寫法，不然會在主控台跳警告 */
+    t = String(t).replace(/✓/g, "\\checkmark").replace(/、/g, ",\\ ");
     try { return katex.renderToString(t, { displayMode: !!disp, throwOnError: false, strict: "ignore" }); }
     catch (e) { return '<code class="kx-err">' + esc(t) + "</code>"; }
   }
@@ -80,7 +80,7 @@
     return '<figure class="' + cls + '"><img src="../' + esc(file) + '" style="width:' + w + 'px" alt="' + esc(caption || "附圖") + '" loading="lazy">' +
       (caption ? "<figcaption>" + rich(caption) + "</figcaption>" : "") + "</figure>";
   }
-  var BOX = { key: "★ ", warn: "⚠ ", niu: "♥ 牛夫子", alt: "✎ ", supp: "＋ 補充", link: "⇄ 串聯" };
+  var BOX = { key: "★ ", warn: "", niu: "牛夫子", alt: "", supp: "＋ 補充", link: "⇄ 串聯" };
   function box(b) {
     var st = BOX[b.style] ? b.style : "key", title = b.title || "", head;
     if (st === "niu" || st === "supp" || st === "link") {
@@ -152,8 +152,8 @@
           (p.solution && p.solution.length ? '<button type="button" class="lnk tp" data-p="' + i + '">看這一小題的詳解</button><div class="part-sol" hidden></div>' : "") + "</div>";
       });
     } else h += ansUI(q, q.qid);
-    h += '<div class="q-tools">' + (q.key ? '<button type="button" class="btn tk">💡 破題點</button>' : "") +
-      '<button type="button" class="btn ts">📖 詳解</button><span class="grow"></span>' +
+    h += '<div class="q-tools">' + (q.key ? '<button type="button" class="btn tk">破題點</button>' : "") +
+      '<button type="button" class="btn ts">詳解</button><span class="grow"></span>' +
       '<button type="button" class="btn fb" data-k="unclear">詳解看不懂</button><button type="button" class="btn fb" data-k="error">題目有問題</button></div>' +
       '<div class="q-key" hidden></div><div class="q-sol" hidden></div><div class="fb-box" hidden></div>';
     return h + "</div></article>";
@@ -191,7 +191,7 @@
     h += secBar("考點地圖", "近五年學測數A（111–115）怎麼考「" + u + "」", "", "map");
     h += '<div class="intro">' + blocks(D.intro) + "</div>";
     if (D.exam_map.length) {
-      h += table(["節點", "熱度", "出現（年-題號）", "配分", "近年怎麼考"], D.exam_map.map(function (m) {
+      h += table(["節點", "熱度", "出現（年份）", "配分", "近年怎麼考"], D.exam_map.map(function (m) {
         return [{ html: '<a href="#node-' + esc(m.node) + '">' + esc(m.node) + "</a>　" + rich(m.title) }, HEAT[m.heat] || "", (m.exam || []).join("、") || "—", m.points == null ? "" : String(m.points), m.note || ""];
       }), "map-tbl");
     }
@@ -245,8 +245,8 @@
     }
     h += '<span class="meta">' + (CONF[rec.conf] || "") + "・" + fmtT(rec.t) + (rec.h ? "・作答前看過" + (rec.h === "key" ? "破題點" : "詳解") : "") + "</span>" +
       '<button type="button" class="lnk redo">重做</button>';
-    if (!rec.ok && rec.conf === "h") h += '<span class="nudge hc">⚠ 有把握卻答錯：這種「以為會」最值得回頭看詳解，找出卡在哪一步。</span>';
-    else if (!rec.ok) h += '<span class="nudge">按「📖 詳解」對照，找出卡在哪一步；或先看「💡 破題點」再重做一次。</span>';
+    if (!rec.ok && rec.conf === "h") h += '<span class="nudge hc">有把握卻答錯：這種「以為會」最值得回頭看詳解，找出卡在哪一步。</span>';
+    else if (!rec.ok) h += '<span class="nudge">按「詳解」對照，找出卡在哪一步；或先看「破題點」再重做一次。</span>';
     else if (rec.conf === "l") h += '<span class="nudge">猜對的還不算會，過幾天再做一次。</span>';
     $(".res", ans).innerHTML = h;
     fitWide($(".res", ans));
@@ -357,7 +357,7 @@
     C.feedback(doc).then(function () {
       SENT[qid + "|" + kind] = 1;
       fb.innerHTML = '<span class="fb-done">✓ 已收到，謝謝！老師會看到這則回報。</span>';
-    }).catch(function (e) { btn.disabled = false; st.textContent = "⚠ 送出失敗：" + ((e && e.message) || "請稍後再試"); });
+    }).catch(function (e) { btn.disabled = false; st.textContent = "送出失敗：" + ((e && e.message) || "請稍後再試"); });
   }
 
   /* ══════════ 長公式：超出寬度的行內公式包一層可左右捲的框 ══════════ */
@@ -431,16 +431,16 @@
       var tools = (I.main[c] || I.any[c] || []).slice(0, 3), pr = practiceLinks(c);
       h += '<li><span class="kpn">考點 ' + esc(c) + (I.names[c] ? " " + esc(I.names[c]) : "") + "</span>：" +
         (tools.length ? "工具地圖 " + tools.map(toolLink).join("、") + "｜" : "") +
-        '<a href="' + REFLEX + "?kp=" + encodeURIComponent(c) + '" target="_blank" rel="noopener">⚔️ 直覺道場練反射</a>' +
+        '<a href="' + REFLEX + "?kp=" + encodeURIComponent(c) + '" target="_blank" rel="noopener">直覺道場練反射</a>' +
         (pr.length ? "｜練習本 " + pr.join("、") : "") + "</li>";
     });
     return h + "</ul></div>";
   }
   function progHtml() {
-    var S = stats(), T = S.T, h = '<div class="prog-card"><h2>📊 我的進度・' + esc(D.unit) + '<button type="button" class="btn x pg-close">關閉</button></h2>';
+    var S = stats(), T = S.T, h = '<div class="prog-card"><h2>我的進度・' + esc(D.unit) + '<button type="button" class="btn x pg-close">關閉</button></h2>';
     h += '<p class="pg-sum">本單元共 <b>' + T.n + "</b> 題（題組逐小題算），做了 <b>" + T.d + "</b> 題，答對 <b>" + T.ok + "</b> 題" + (T.d ? "（" + Math.round(100 * T.ok / T.d) + "%）" : "") + "。</p>";
-    if (!T.d) h += '<p class="pg-flag">還沒有紀錄。每題作答後會自動記在這台裝置（登入後跨裝置同步）。建議從第一個節點的<b>隨堂類題</b>開始；卡住就先按「💡 破題點」。</p>';
-    if (T.hc) h += '<p class="pg-flag hc">⚠ 有把握卻答錯 <b>' + T.hc + "</b> 題——以為會、其實還沒會，這些最值得先回頭看。</p>";
+    if (!T.d) h += '<p class="pg-flag">還沒有紀錄。每題作答後會自動記在這台裝置（登入後跨裝置同步）。建議從第一個節點的<b>隨堂類題</b>開始；卡住就先按「破題點」。</p>';
+    if (T.hc) h += '<p class="pg-flag hc">有把握卻答錯 <b>' + T.hc + "</b> 題——以為會、其實還沒會，這些最值得先回頭看。</p>";
     if (T.g) h += '<p class="pg-flag">猜對 ' + T.g + " 題：答對了，但還不算會。</p>";
     if (T.hint) h += '<p class="pg-flag">看過破題點或詳解之後才答對 ' + T.hint + " 題：這是在學，很好；過幾天不看提示再做一次，才算真的會。</p>";
     h += table(["節點", "做了", "答對率"], D.nodes.map(function (nd) {
@@ -505,7 +505,7 @@
     if (location.hash) { var el = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (el) el.scrollIntoView(); }
     if (window.ReflexCloud && window.ReflexCloud.ready) window.ReflexCloud.ready.then(function (ok) { if (ok) document.body.classList.add("cloud-on"); });
   }
-  function fail(msg) { root.innerHTML = '<p class="loading">⚠ ' + esc(msg) + "</p>"; }
+  function fail(msg) { root.innerHTML = '<p class="loading">' + esc(msg) + "</p>"; }
   function boot() {
     if (!window.katex) { fail("數學排版元件（KaTeX）沒有載入，請重新整理。"); return; }
     if (window.V2_UNIT) { start(window.V2_UNIT); return; }

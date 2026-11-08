@@ -15,7 +15,7 @@
   var TOK = /(\$\$[\s\S]+?\$\$|\$[\s\S]+?\$|\*\*[\s\S]+?\*\*)/;
   function tex(t, disp) {
     if (!window.katex) return "<code>" + esc(t) + "</code>";
-    t = String(t).replace(/✔/g, "\\checkmark").replace(/、/g, ",\\ ");
+    t = String(t).replace(/✓/g, "\\checkmark").replace(/、/g, ",\\ ");
     try { return katex.renderToString(t, { displayMode: !!disp, throwOnError: false, strict: "ignore" }); }
     catch (e) { return '<code class="kx-err">' + esc(t) + "</code>"; }
   }
@@ -52,7 +52,7 @@
     (rows || []).forEach(function (r) { h += "<tr>" + r.map(function (x) { return "<td>" + (x && x.html ? x.html : rich(String(x))) + "</td>"; }).join("") + "</tr>"; });
     return h + "</table></div>";
   }
-  var BOX = { key: "★ ", warn: "⚠ ", niu: "♥ 牛夫子", alt: "✎ ", supp: "＋ 補充", link: "⇄ 串聯" };
+  var BOX = { key: "★ ", warn: "", niu: "牛夫子", alt: "", supp: "＋ 補充", link: "⇄ 串聯" };
   function box(b) {
     var st = BOX[b.style] ? b.style : "key", title = b.title || "", head;
     if (st === "niu" || st === "supp" || st === "link") {
@@ -68,7 +68,7 @@
     var h = '<div class="intro">' + blocks(D.intro) + "</div>";
     if (D.exam_map && D.exam_map.length) {
       h += '<h2 class="sec-bar" id="map"><span class="sb-l">考點地圖</span><span class="sb-t">近五年學測數A（111–115）怎麼考「' + esc(D.unit) + '」</span></h2>';
-      h += table(["節點", "熱度", "出現（年-題號）", "配分", "近年怎麼考"], D.exam_map.map(function (m) {
+      h += table(["節點", "熱度", "出現（年份）", "配分", "近年怎麼考"], D.exam_map.map(function (m) {
         return [{ html: "<b>" + esc(m.node || "") + "</b>　" + rich(m.title || "") }, HEAT[m.heat] || "", (m.exam || []).join("、") || "—", m.points == null ? "" : String(m.points), m.note || ""];
       }), "map-tbl");
     }
@@ -81,6 +81,6 @@
     root.innerHTML = h;
   }
 
-  if (!window.katex) { if (root) root.innerHTML = '<p class="loading">⚠ 數學排版元件（KaTeX）沒有載入，請重新整理。</p>'; }
+  if (!window.katex) { if (root) root.innerHTML = '<p class="loading">數學排版元件（KaTeX）沒有載入，請重新整理。</p>'; }
   else render();
 })();

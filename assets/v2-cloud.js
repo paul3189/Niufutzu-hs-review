@@ -30,8 +30,8 @@
     clearTimeout(timer);
     timer = setTimeout(function () {
       if (v === lastUp) return;
-      C.practiceSave(CH, JSON.parse(v)).then(function () { lastUp = v; setStatus("☁️ 已同步 " + new Date().toLocaleTimeString()); })
-        .catch(function (e) { setStatus("⚠ 上傳失敗：" + esc(e && e.message)); });
+      C.practiceSave(CH, JSON.parse(v)).then(function () { lastUp = v; setStatus("已同步 " + new Date().toLocaleTimeString()); })
+        .catch(function (e) { setStatus("上傳失敗：" + esc(e && e.message)); });
     }, 1500);
   };
 
@@ -41,21 +41,21 @@
     C.practiceLoad(CH).then(function (cloud) {
       var loc = localRec(), lts = localTs();
       if (!cloud || !cloud.rec) {
-        if (countOf(loc)) return C.practiceSave(CH, loc).then(function () { setStatus("☁️ 已把這台裝置的紀錄上傳"); });
-        setStatus("☁️ 已登入，作答紀錄會自動同步");
+        if (countOf(loc)) return C.practiceSave(CH, loc).then(function () { setStatus("已把這台裝置的紀錄上傳"); });
+        setStatus("已登入，作答紀錄會自動同步");
         return;
       }
       var cloudNewer = cloud.ts > lts || !loc || countOf(cloud.rec) > countOf(loc);
       if (cloudNewer && JSON.stringify(cloud.rec) !== JSON.stringify(loc)) {
-        if (sessionStorage.getItem(FLAG)) { setStatus("☁️ 雲端有較新的紀錄，重新整理後套用"); return; }
+        if (sessionStorage.getItem(FLAG)) { setStatus("雲端有較新的紀錄，重新整理後套用"); return; }
         origSet(KEY, JSON.stringify(cloud.rec)); stampLocal(cloud.ts || Date.now());
         sessionStorage.setItem(FLAG, "1");
         location.reload();
         return;
       }
-      if (!cloudNewer && loc) return C.practiceSave(CH, loc).then(function () { setStatus("☁️ 已同步"); });
-      setStatus("☁️ 已同步");
-    }).catch(function (e) { setStatus("⚠ 讀取雲端失敗：" + esc(e && e.message)); });
+      if (!cloudNewer && loc) return C.practiceSave(CH, loc).then(function () { setStatus("已同步"); });
+      setStatus("已同步");
+    }).catch(function (e) { setStatus("讀取雲端失敗：" + esc(e && e.message)); });
   }
 
   /* 3. 帳號區（頁首） */
@@ -65,7 +65,7 @@
     host = document.getElementById("acct");
     if (!host) return false;
     host.className = "acct"; host.hidden = false;
-    host.innerHTML = '<button type="button" class="tb-btn acct-btn">☁️ 登入</button><div class="acct-pop" hidden></div>';
+    host.innerHTML = '<button type="button" class="tb-btn acct-btn">登入</button><div class="acct-pop" hidden></div>';
     btn = host.querySelector(".acct-btn"); pop = host.querySelector(".acct-pop");
     btn.onclick = function () { pop.hidden = !pop.hidden; };
     document.addEventListener("click", function (e) { if (!host.contains(e.target)) pop.hidden = true; });
@@ -75,14 +75,14 @@
     if (!host && !build()) return;
     var u = C.user();
     if (u) {
-      btn.textContent = "☁️ " + (C.nick() || "已登入"); btn.classList.add("on");
+      btn.textContent = "" + (C.nick() || "已登入"); btn.classList.add("on");
       pop.innerHTML = "<b>作答紀錄同步</b><div>" + esc(u.email) + "（" + esc(C.nick() || "") + '）</div><div class="st">' + status + "</div>" +
         '<div class="small">登入後，這個單元的作答紀錄存到你的帳號，換裝置也看得到。</div>' +
         '<button type="button" class="btn out" style="margin-top:6px">登出</button>';
       pop.querySelector(".out").onclick = function () { C.signOut(); };
       reconcile();
     } else {
-      btn.textContent = "☁️ 登入"; btn.classList.remove("on");
+      btn.textContent = "登入"; btn.classList.remove("on");
       pop.innerHTML = "<b>作答紀錄同步</b><div class=\"small\">目前紀錄只存在這台裝置。用 Email 登入（免密碼）就能跨裝置同步。</div>" +
         '<input type="email" class="em" placeholder="你的 Email" value="' + esc(C.rememberedEmail()) + '">' +
         '<button type="button" class="btn pri send">寄登入連結</button><div class="st">' + status + "</div>";
@@ -92,8 +92,8 @@
         setStatus("寄送中…");
         C.sendLink(em).then(function () {
           if (C.mode && C.mode() === "mock" && C.mockLogin) { status = "（測試模式：直接登入）"; C.mockLogin(); return; }
-          setStatus("✉️ 已寄出。請在這台裝置打開信裡的連結，就會登入。");
-        }).catch(function (e) { setStatus("⚠ 寄送失敗：" + esc(e && e.message)); });
+          setStatus("已寄出。請在這台裝置打開信裡的連結，就會登入。");
+        }).catch(function (e) { setStatus("寄送失敗：" + esc(e && e.message)); });
       };
     }
   }
